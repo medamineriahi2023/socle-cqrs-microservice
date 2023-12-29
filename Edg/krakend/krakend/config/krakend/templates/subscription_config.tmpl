@@ -1,0 +1,154 @@
+{
+      "@comment": "Create Plan Endpoint",
+      "endpoint": "/catalog/create/plan",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/catalog/plan",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+},
+{
+      "@comment": "Delete Plan Endpoint",
+      "endpoint": "/catalog/delete/plan/{idPlan}",
+      "method": "DELETE",
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/catalog/{idPlan}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+},
+{
+          "@comment": "Create Product Endpoint",
+          "endpoint": "/products/create",
+          "method": "POST",
+          "backend": [
+            {
+              "host": ["{{ env "SUBSCRIPTION_API" }}"],
+              "url_pattern": "/api/v1/products",
+              "method": "POST",
+              "encoding": "json",
+              "sd": "static",
+              "disable_host_sanitize": false
+            }
+          ]
+},
+{
+      "@comment": "Update Product Endpoint",
+      "endpoint": "/products/update/{idProd}",
+      "method": "PUT",
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/products/{idProd}",
+          "method": "PUT",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+},
+{
+      "@comment": "Delete Product Endpoint",
+      "endpoint": "/products/delete/{idProd}",
+      "method": "DELETE",
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/products/{idProd}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+},
+{
+  "@comment": "create subscription Endpoint",
+  "endpoint": "/subscription/create",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ env "SUBSCRIPTION_API" }}"],
+      "url_pattern": "/api/v1/subscription",
+      "method": "POST",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+},
+{
+  "@comment": "create tenant Endpoint",
+  "endpoint": "/catalog/create/tenant",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ env "SUBSCRIPTION_API" }}"],
+      "url_pattern": "/api/v1/catalog/tenant",
+      "method": "POST",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+},
+{
+  "@comment": "get all products",
+  "endpoint": "/products",
+  "method": "GET",
+  "backend": [
+    {
+      "host": ["{{ env "SUBSCRIPTION_API" }}"],
+      "url_pattern": "/products",
+      "method": "GET",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+},
+{
+  "@comment": "get product by id",
+  "endpoint": "/products/{id}",
+  "method": "GET",
+  "backend": [
+    {
+      "host": ["{{ env "SUBSCRIPTION_API" }}"],
+      "url_pattern": "/products/{id}",
+      "method": "GET",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+},
+{
+ "@comment": "get all plans",
+  "endpoint": "/plans",
+  "method": "GET",
+  "backend": [
+    {
+      "host": ["{{ env "SUBSCRIPTION_API" }}"],
+      "url_pattern": "/plans",
+      "method": "GET",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+}
+
+
+
+

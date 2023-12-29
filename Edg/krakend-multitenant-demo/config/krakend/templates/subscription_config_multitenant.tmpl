@@ -1,0 +1,232 @@
+
+    {
+      "@comment": "Create Plan Endpoint",
+      "endpoint": "/{tenant}/catalog/create/plan",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/catalog/plan",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Delete Plan Endpoint",
+      "endpoint": "/{tenant}/catalog/delete/plan/{idPlan}",
+      "method": "DELETE",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/catalog/{idPlan}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Create Product Endpoint",
+      "endpoint": "/{tenant}/products/create",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/products",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Update Product Endpoint",
+      "endpoint": "/{tenant}/products/update/{idProd}",
+      "method": "PUT",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/products/{idProd}",
+          "method": "PUT",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Delete Product Endpoint",
+      "endpoint": "/{tenant}/products/delete/{idProd}",
+      "method": "DELETE",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/products/{idProd}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "create subscription Endpoint",
+      "endpoint": "/{tenant}/subscription/create",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/subscription",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "@comment": "create tenant Endpoint",
+      "endpoint": "/{tenant}/catalog/create/tenant",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/api/v1/catalog/tenant",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "@comment": "get all products",
+      "endpoint": "/{tenant}/products",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/products",
+          "method": "GET",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "@comment": "get product by id",
+      "endpoint": "/{tenant}/products/{id}",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/products/{id}",
+          "method": "GET",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "@comment": "get all plans",
+      "endpoint": "/{tenant}/plans",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SUBSCRIPTION_API" }}"],
+          "url_pattern": "/plans",
+          "method": "GET",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    }
+

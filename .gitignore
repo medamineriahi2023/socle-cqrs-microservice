@@ -1,0 +1,36 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+workflow/.env
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+workflow/.env
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+workflow/.env
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+workflow/.env
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+workflow/.env
+### VS Code ###
+.vscode/
+CQRS/data/mysql.sock
+workflow/.env

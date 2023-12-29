@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  config-server:
+    container_name: config-server-socle
+    ports:
+      - '8888:8888'
+    image: interne.oga.fr/socle/config-server
+    networks:
+      - net-socle
+    environment:
+      - GIT_URI=${GIT_URI}
+      - GIT_USERNAME=${GIT_USERNAME}
+      - GIT_PASSWORD=${GIT_PASSWORD}
+      - BRANCH=${BRANCH}

@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  cloud-gateway:
+    container_name: cloud-gateway-socle
+    ports:
+      - '8001:8001'
+    image: interne.oga.fr/socle/cloud-gateway
+    depends_on:
+      - discovrey-server
+    networks:
+      - net-socle
+    environment:
+      - EUREKA_AUTH_URL=${EUREKA_AUTH_URL}
+      - REF_MS_URL=${REF_MS_URL}
+      - EUREKA_URL=${EUREKA_URL}
+      - ZIPKIN_URL=${ZIPKIN_URL}

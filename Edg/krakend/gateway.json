@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "name": "socle gw",
+  "endpoints": [
+    {
+      "endpoint": "/ged/**",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/all",
+          "encoding": "no-op",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://host.docker.internal:5000"
+          ],
+          "disable_host_sanitize": true
+        }
+      ]
+    }
+  ]
+}

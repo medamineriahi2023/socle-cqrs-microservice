@@ -1,0 +1,45 @@
+version: '3.3'
+services:
+
+
+  mongo_primary:
+    image: mongo:latest
+    container_name: mongo_primary
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=microRefConsumerEmpl
+    volumes:
+      - db_mongodb_primary_socle:/data
+    networks:
+      - net-socle
+
+  mongo_qualifier:
+    image: mongo:latest
+    container_name: mongo_qualifier
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=microRefProducer
+    volumes:
+      - db_mongodb_qualifier_socle:/data
+    networks:
+      - net-socle
+
+
+# version: '3.3'
+# services:
+
+#   mongodb-socle:
+#     image: mongo:6.0.2
+#     restart: always
+#     container_name: mongodb-socle
+#     environment:
+#      - MONGO_INITDB_ROOT_USERNAME=admin
+#      - MONGO_INITDB_ROOT_PASSWORD=CywN&H5Z^M87
+#     ports:
+#       - 27017
+#     volumes:
+#       - db_mongodb_socle
+#     networks:
+#       - net-socle

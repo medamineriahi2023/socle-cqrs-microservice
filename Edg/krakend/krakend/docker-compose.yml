@@ -1,0 +1,57 @@
+version: "3"
+services:
+  krakend_ce:
+    # The :watch image restarts the service automatically when the configuration files change.
+    # Do not use this image in production, it's meant to speed up your testing and development.
+    image: devopsfaith/krakend:watch
+    volumes:
+      - ./config/krakend:/etc/krakend
+    ports:
+      - "1234:1234"
+      - "8080:8080"
+      - "8091:8090"
+    environment:
+      - FC_ENABLE=1
+      - FC_SETTINGS=./settings/prod
+      - FC_PARTIALS=./partials
+      - FC_TEMPLATES=./templates
+      - FC_OUT=out.json
+      - SERVICE_NAME=KrakenD API Gateway
+      - SECURITY_API=http://192.168.224.1:5004
+      - GED_API=http://192.168.224.1:9008
+      - SUBSCRIPTION_API=http://192.168.224.1:8090
+      - WORKFLOW_API=http://192.168.224.1:8091
+    command: [ "run", "-dc", "krakend-flexible-config.tmpl", "" ]
+    depends_on:
+      - fake_api
+      - jaeger
+  jaeger:
+    image: jaegertracing/all-in-one:1
+    ports:
+      - "16685:16686"
+      - "14267:14268"
+  elasticsearch:
+    image: elasticsearch:8.4.1
+    environment:
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=false"
+      - "xpack.security.transport.ssl.enabled=false"
+      - "xpack.security.http.ssl.enabled=false"
+    ports:
+      - "19201:9200"
+      - "9001:9300"
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15671:15672"
+  fake_api:
+    image: ghcr.io/lpereira/lwan:latest
+    volumes:
+      - ./data:/wwwroot
+    ports:
+      - "8003:8080"
+  web:
+    build:
+      context: images/spa-auth-web
+    ports:
+      - "3000:3000"

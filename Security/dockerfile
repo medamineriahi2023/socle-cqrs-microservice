@@ -1,0 +1,19 @@
+# Utilisez une image de base appropriée pour Java (par exemple, une image OpenJDK)
+FROM openjdk:17-jdk
+
+# Définissez le répertoire de travail dans le conteneur
+WORKDIR /src
+
+# Copiez le fichier de configuration dans le conteneur
+COPY src/main/resources/application.yml  src/main/resources/application.properties
+
+# Copiez le fichier JAR de votre application Spring Boot dans le conteneur
+
+
+
+
+# Exposez le port sur lequel votre application Spring Boot écoute (remplacez <PORT> par le port réel)
+EXPOSE 5005
+
+# Démarrez votre application Spring Boot lorsque le conteneur est lancé
+CMD ["java", "-jar", "CQRS.jar"]

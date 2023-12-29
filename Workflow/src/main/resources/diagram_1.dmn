@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_15x54wt" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="Decision_01ztkc2" name="Decision 1">
+    <decisionTable id="DecisionTable_05pnngq" hitPolicy="ANY">
+      <input id="Input_1" label="reviewId">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>reviewId</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Niveau" name="Niveau" typeRef="number" />
+      <rule id="DecisionRule_1gb9lpe">
+        <inputEntry id="UnaryTests_0z3s4v1">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ll5o0c">
+          <text>0</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1i7d2aw">
+        <inputEntry id="UnaryTests_0zmthdc">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1nnw0r5">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_01ztkc2">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

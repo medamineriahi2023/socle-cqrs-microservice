@@ -1,0 +1,489 @@
+_format_version: "3.0"
+services:
+  - name: create-user
+    url: "http://192.168.0.1:5004/security/v1/users"
+    routes:
+      - paths:
+          - "/create/user"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: get-users
+    url: "http://192.168.0.1:5004/security/v1/users"
+    routes:
+      - paths:
+          - "/all/users"
+        methods:
+          - GET
+    plugins:
+#      - name: jwt
+#        config:
+#            realm: tenant1-realm
+#            client_id: tenant1-client
+#            confidential: true
+#            issuer: "https://your-keycloak-server/auth/realms/your-realm"
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-user
+    url: "http://192.168.0.1:5004/security/v1/users"
+    routes:
+      - paths:
+          - "/update/user"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+#  - name: delete-user
+#    url: "http://192.168.0.1:5004/security/v1/users/{iduser:\d+}"
+#    routes:
+#      - paths:
+#          - "/delete/user/{iduser:\d+}"
+#        methods:
+#          - DELETE
+#    plugins:
+#      - name: "response-transformer"
+#        config:
+#          add:
+#            headers:
+#              - "Content-Type: application/json"
+
+  - name: change-password
+    url: "http://192.168.0.1:5004/security/v1/users/changepassword"
+    routes:
+      - paths:
+          - "/user/changepassword"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: login
+    url: "http://192.168.0.1:5004/security/v1/users/login"
+    routes:
+      - paths:
+          - "/user/login"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: create-group
+    url: "http://192.168.0.1:5004/security/v1/groups"
+    routes:
+      - paths:
+          - "/create/group"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-group
+    url: "http://192.168.0.1:5004/security/v1/groups"
+    routes:
+      - paths:
+          - "/update/group"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+#  - name: delete-group
+#    url: "http://192.168.0.1:5004/security/v1/groups/{idgroup:\d+}"
+#    routes:
+#      - paths:
+#          - "/delete/group/{idgroup:\d+}"
+#        methods:
+#          - DELETE
+#    plugins:
+#      - name: "response-transformer"
+#        config:
+#          add:
+#            headers:
+#              - "Content-Type: application/json"
+
+  - name: create-role
+    url: "http://192.168.0.1:5004/security/v1/roles"
+    routes:
+      - paths:
+          - "/create/role"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-role
+    url: "http://192.168.0.1:5004/security/v1/roles"
+    routes:
+      - paths:
+          - "/update/role"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+#  - name: delete-role
+#    url: "http://192.168.0.1:5004/security/v1/roles/{idrole:\d+}"
+#    routes:
+#      - paths:
+#          - "/delete/role/{idrole:\d+}"
+#        methods:
+#          - DELETE
+#    plugins:
+#      - name: "response-transformer"
+#        config:
+#          add:
+#            headers:
+#              - "Content-Type: application/json"
+
+  - name: get-all-users
+    url: "http://192.168.0.1:5004/security/v1/users"
+    routes:
+      - paths:
+          - "/get/all/users"
+        methods:
+          - GET
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: get-user-by-id
+    url: "http://192.168.0.1:5004/security/v1/users"
+    routes:
+      - paths:
+          - "/get/user/:userId"
+        methods:
+          - GET
+    plugins:
+      - name: "response-transformer"
+        config:
+          rules:
+            -path : "/get/user/:userId"
+          rewrite:
+            - path: "/${userId}"
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+
+
+  - name: get-all-roles
+    url: "http://192.168.0.1:5004/security/v1/roles"
+    routes:
+      - paths:
+          - "/get/all/roles"
+        methods:
+          - GET
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+#  - name: get-role-by-id
+#    url: "http://192.168.0.1:5004/security/v1/roles/{id:\d+}"
+#    routes:
+#      - paths:
+#          - "/get/role/{id:\d+}"
+#        methods:
+#          - GET
+#    plugins:
+#      - name: "response-transformer"
+#        config:
+#          add:
+#            headers:
+#              - "Content-Type: application/json"
+
+  - name: get-all-groups
+    url: "http://192.168.0.1:5004/security/v1/groups"
+    routes:
+      - paths:
+          - "/security/all/groups"
+        methods:
+          - GET
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+#  - name: get-group-by-id
+#    url: "http://192.168.0.1:5004/security/v1/groups/{id:\d+}"
+#    routes:
+#      - paths:
+#          - "/security/get/group/{id:\d+}"
+#        methods:
+#          - GET
+#    plugins:
+#      - name: "response-transformer"
+#        config:
+#          add:
+#            headers:
+#              - "Content-Type: application/json"
+
+  - name: create-folder
+    url: "http://192.168.0.1:9008/ged/createfolder"
+    routes:
+      - paths:
+          - "/ged/createfolder"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-folder
+    url: "http://192.168.0.1:9008/ged/updatefolder"
+    routes:
+      - paths:
+          - "/ged/updatefolder"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: delete-folder
+    url: "http://192.168.0.1:9008/ged/deletefolder"
+    routes:
+      - paths:
+          - "/ged/deletefolder"
+        methods:
+          - DELETE
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: move-folder
+    url: "http://192.168.0.1:9008/ged/movefolder"
+    routes:
+      - paths:
+          - "/ged/movefolder"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: create-file
+    url: "http://192.168.0.1:9008/ged/createfile"
+    routes:
+      - paths:
+          - "/ged/createfile"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-file
+    url: "http://192.168.0.1:9008/ged/updatefile"
+    routes:
+      - paths:
+          - "/ged/updatefile"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: delete-file
+    url: "http://192.168.0.1:9008/ged/deletefile"
+    routes:
+      - paths:
+          - "/ged/deletefile"
+        methods:
+          - DELETE
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: move-file
+    url: "http://192.168.0.1:9008/ged/movefile"
+    routes:
+      - paths:
+          - "/ged/movefile"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: create-user-ged
+    url: "http://192.168.0.1:9008/ged/createuser"
+    routes:
+      - paths:
+          - "/ged/createuser"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: update-user-ged
+    url: "http://192.168.0.1:9008/ged/updateuser"
+    routes:
+      - paths:
+          - "/ged/updateuser"
+        methods:
+          - PUT
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: create-group-ged
+    url: "http://192.168.0.1:9008/ged/creategroup"
+    routes:
+      - paths:
+          - "/ged/creategroup"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: delete-group-ged
+    url: "http://192.168.0.1:9008/ged/deletegroup"
+    routes:
+      - paths:
+          - "/ged/deletegroup"
+        methods:
+          - DELETE
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: assign-person-to-group
+    url: "http://192.168.0.1:9008/ged/assignpersontogroup"
+    routes:
+      - paths:
+          - "/ged/assignpersontogroup"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: remove-person-from-group
+    url: "http://192.168.0.1:9008/ged/removepersonfromgroup"
+    routes:
+      - paths:
+          - "/ged/removepersonfromgroup"
+        methods:
+          - DELETE
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: create-shared-link
+    url: "http://192.168.0.1:9008/ged/createsharedlink"
+    routes:
+      - paths:
+          - "/ged/createsharedlink"
+        methods:
+          - POST
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"
+
+  - name: delete-shared-link
+    url: "http://192.168.0.1:9008/ged/deletesharedlink"
+    routes:
+      - paths:
+          - "/ged/deletesharedlink"
+        methods:
+          - DELETE
+    plugins:
+      - name: "response-transformer"
+        config:
+          add:
+            headers:
+              - "Content-Type: application/json"

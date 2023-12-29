@@ -1,0 +1,337 @@
+{
+      "@comment": "Create User Endpoint",
+      "endpoint": "/security/users",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "get Users Endpoint",
+      "endpoint": "/security/users",
+      "method": "GET",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "GET",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Update User Endpoint",
+      "endpoint": "/security/users",
+      "method": "PUT",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "PUT"
+        }
+      ]
+    },
+    {
+      "@comment": "Delete User Endpoint",
+      "endpoint": "/security/users/{iduser}",
+      "method": "DELETE",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/{iduser}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Change Password Endpoint",
+      "endpoint": "/security/users/resetPassword",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/changepassword",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Login Endpoint",
+      "endpoint": "/security/user/login",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/login",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Logout Endpoint",
+      "endpoint": "/security/users/logout/{iduser}",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/logout/{iduser}",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Create Group Endpoint",
+      "endpoint": "/security/users/groups",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/groups",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Update Group Endpoint",
+      "endpoint": "/security/users/groups",
+      "method": "PUT",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/groups",
+          "method": "PUT",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Delete Group Endpoint",
+      "endpoint": "/security/users/groups/{idgroup}",
+      "method": "DELETE",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/groups/{idgroup}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Create Role Endpoint",
+      "endpoint": "/security/users/roles",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/roles",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Update Role Endpoint",
+      "endpoint": "/security/users/roles",
+      "method": "PUT",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/roles",
+          "method": "PUT",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Delete Role Endpoint",
+      "endpoint": "/security/users/roles/{idrole}",
+      "method": "DELETE",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/roles/{idrole}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Get User by ID Endpoint",
+      "endpoint": "/security/users/{id}",
+      "method": "GET",
+      "backend": [
+        {"host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/{id}",
+          "method": "GET",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+      {
+          "@comment": "assign role to user",
+          "endpoint": "/security/users/assignRolesToUser",
+          "method": "POST",
+          "backend": [
+            {"host": ["{{ env "SECURITY_API" }}"],
+              "url_pattern": "/security/v1/users/assignRolesToUser",
+              "method": "POST",
+              "encoding": "json",
+              "sd": "static",
+              "disable_host_sanitize": false
+            }
+          ]
+        },
+    {
+      "@comment": "Get All Roles Endpoint",
+      "endpoint": "/security/users/roles",
+      "method": "GET",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/roles",
+          "method": "GET",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Get Role by ID Endpoint",
+      "endpoint": "/security/users/roles/{id}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/roles/{id}",
+          "method": "GET",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/groups",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/groups",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/groups/{id}",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/groups/{id}",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/groups/assignUsersToGroup",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/groups/assignUsersToGroup",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/groups/assignRolesToGroup",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/groups/assignRolesToGroup",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/roles/permissions",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/roles/permissions",
+          "method": "GET",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "sd": "static",
+          "is_collection": true,
+          "mapping": {
+          "collection": "roles"
+         }
+        }
+      ]
+    },
+    {
+      "endpoint": "/security/users/roles/assignPermissionToRole",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/security/v1/roles/assignCompositeRolesForRole",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["{{ env "SECURITY_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    }

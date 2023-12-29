@@ -1,0 +1,61 @@
+server:
+  port: 9008
+
+spring:
+  application:
+    name: microservice-ged
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  activemq:
+    brokerUrl: tcp://localhost:61616
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/ged
+      Primary:
+        database:
+          microRefConsumerEmpl
+      Qualifier:
+        database:
+          microRefProducer
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: MicroRefConsumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:password123@localhost:8761/eureka/
+
+# Configuration for Alfresco Content Services (ACS)
+content:
+  service:
+    url: http://localhost:8080
+    security:
+      basicAuth:
+        username: admin
+        password: admin
+
+

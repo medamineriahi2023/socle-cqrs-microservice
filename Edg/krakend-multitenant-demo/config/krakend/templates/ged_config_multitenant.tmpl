@@ -1,0 +1,68 @@
+
+    {
+      "endpoint": "/{tenant}/ged/createfolder",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/ged/createfolder",
+          "method": "POST",
+          "encoding": "json",
+          "host": ["{{ env "GED_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/ged/updatefolder",
+      "method": "PUT",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/ged/updatefolder",
+          "method": "PUT",
+          "encoding": "json",
+          "host": ["{{ env "GED_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/ged/deletefolder",
+      "method": "DELETE",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/ged/deletefolder",
+          "method": "DELETE",
+          "encoding": "json",
+          "host": ["{{ env "GED_API" }}"],
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    }
+

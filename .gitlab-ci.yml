@@ -1,0 +1,238 @@
+include:
+  - project: 'oga_admin/ci-cd-central'
+    ref: jobs
+    file:
+      - '/jobs/build-ms.yml'
+      - '/jobs/package-microservice.yml'
+      - '/jobs/ssh-connect.yml'
+      - '/jobs/notification.yml'
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  untracked: true
+  paths:
+    - .m2/repository/
+    - target/
+    - ../cs_version
+
+stages:
+  - build
+  - verify
+  - package
+  - deploy
+  - teams_notifications
+  - testtesttest
+
+before_script:
+  - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+
+# BUILD STAGE
+build_CQRS_Ref:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "CQRS-Ref"
+
+build_CG:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "Edg/Cloud-Gateway"
+
+build_CS:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "Edg/Config-Server"
+
+build_DS:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "Edg/Discovery-Server"
+
+build_GED:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "ged"
+  dependencies:
+    - build_CQRS_Ref
+
+build_SECURITY:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "security"
+  dependencies:
+    - build_CQRS_Ref
+
+build_SUBSCRIPTION:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "subscription"
+  dependencies:
+    - build_CQRS_Ref
+
+build_WORKFLOW:
+  stage: build
+  extends: .build-ms
+  variables:
+    MS_DIR: "workflow"
+  dependencies:
+    - build_CQRS_Ref
+
+# QUALITY CODE STAGE
+quality-GED:
+  stage: verify
+  allow_failure: false
+  script:
+    - cd ged
+    - mvn sonar:sonar -Dsonar.projectKey=analyse-GED-socle -Dsonar.projectName="analyse-GED-socle" -Dsonar.host.url=$SONAR_URL -Dsonar.scm.provider=git -Dsonar.login=$SONAR_TOKEN
+  only:
+    - feature-971
+    - sprint3
+
+quality-SECURITY:
+  stage: verify
+  allow_failure: false
+  script:
+    - cd security
+    - mvn sonar:sonar -Dsonar.projectKey=analyse-SECURITY-socle -Dsonar.projectName="analyse-SECURITY-socle" -Dsonar.host.url=$SONAR_URL -Dsonar.scm.provider=git -Dsonar.login=$SONAR_TOKEN
+  only:
+    - feature-971
+    - sprint3
+
+quality-SUBSCRIPTION:
+  stage: verify
+  allow_failure: false
+  script:
+    - cd subscription
+    - mvn sonar:sonar -Dsonar.projectKey=analyse-SUBSCRIPTION-socle -Dsonar.projectName="analyse-SUBSCRIPTION-socle" -Dsonar.host.url=$SONAR_URL -Dsonar.scm.provider=git -Dsonar.login=$SONAR_TOKEN
+  only:
+    - feature-971
+    - sprint3
+
+quality-WORKFLOW:
+  stage: verify
+  allow_failure: false
+  script:
+    - cd workflow
+    - mvn sonar:sonar -Dsonar.projectKey=analyse-WORKFLOW-socle -Dsonar.projectName="analyse-WORKFLOW-socle" -Dsonar.host.url=$SONAR_URL -Dsonar.scm.provider=git -Dsonar.login=$SONAR_TOKEN
+  only:
+    - feature-971
+    - sprint3
+
+# PACKAGE STAGE
+package_GED:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: ged
+    DOCKERFILE_DIR: ged
+  dependencies:
+    - build_GED
+  only:
+    - feature-971
+    - sprint3
+
+package_SECURITY:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: security
+    DOCKERFILE_DIR: security
+  dependencies:
+    - build_SECURITY
+  only:
+    - feature-971
+    - sprint3
+
+package_SUBSCRIPTION:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: subscription
+    DOCKERFILE_DIR: subscription
+  dependencies:
+    - build_SUBSCRIPTION
+  only:
+    - feature-971
+    - sprint3
+
+package_WORKFLOW:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: workflow
+    DOCKERFILE_DIR: workflow
+  dependencies:
+    - build_WORKFLOW
+  only:
+    - feature-971
+    - sprint3
+
+package_CG:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: cloud-gateway
+    DOCKERFILE_DIR: Edg/Cloud-Gateway
+  dependencies:
+    - build_CG
+  only:
+    - feature-971
+    - sprint3
+
+package_CS:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: config-server
+    DOCKERFILE_DIR: Edg/Config-Server
+  dependencies:
+    - build_CS
+  only:
+    - feature-971
+    - sprint3
+
+package_DS:
+  stage: package
+  extends: .package_ms
+  variables:
+    PROJECT_NAME: socle
+    IMAGE_NAME: discovery-server
+    DOCKERFILE_DIR: Edg/Discovery-Server
+  dependencies:
+    - build_DS
+  only:
+    - feature-971
+    - sprint3
+
+# DEPLOY STAGE
+deploy:
+  stage: deploy
+  when: manual
+  script:
+    - !reference [.sshconnect, script]
+    - ssh -o StrictHostKeyChecking=no oga_admin@$IP_VM_WAYCON "docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY;docker-compose -f socle/Infrastructure/docker-compose.override.yml -f socle/Infrastructure/ged-ms/docker-compose.yml -f socle/Infrastructure/keykloak-ms/docker-compose.yml -f socle/Infrastructure/workflow/docker-compose.yml -f socle/Infrastructure/subscription-ms/docker-compose.yml  --env-file "socle/.env" pull"
+    - ssh -o StrictHostKeyChecking=no oga_admin@$IP_VM_WAYCON "docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY;docker-compose -f socle/Infrastructure/docker-compose.override.yml -f socle/Infrastructure/ged-ms/docker-compose.yml -f socle/Infrastructure/keykloak-ms/docker-compose.yml -f socle/Infrastructure/workflow/docker-compose.yml -f socle/Infrastructure/subscription-ms/docker-compose.yml  --env-file "socle/.env" up -d "
+  only:
+    - feature-971
+    - sprint3
+
+# TEAMS NOTIFICATIONS
+teams_notifications_failed:
+  stage: teams_notifications
+  extends: .pipeline_failed
+
+teams_notifications_success:
+  stage: teams_notifications
+  extends: .pipeline_succeed

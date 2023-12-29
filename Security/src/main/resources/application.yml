@@ -1,0 +1,71 @@
+server:
+  port: 5004
+
+spring:
+  application:
+    name: microservice-security
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      Primary:
+        host: mongo_primary
+        port: 27016
+        database: microRefConsumerEmpl
+      Qualifier:
+        host: mongo_qualifier
+        port: 27017
+        database: microRefProducer
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: MicroRefConsumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:password123@localhost:8761/eureka/
+
+keycloak:
+  auth-server-url: http://localhost:8180/
+  realm: oga
+  resource: socle
+  credentials:
+    secret: 9qM0cAIYm1i0fqX6yEHNMsjbs9wN1Ewf
+  enabled: true
+  use-resource-role-mappings: true
+  bearer-only: true
+  ssl-required: external
+
+admin:
+  username: admin
+  password: admin

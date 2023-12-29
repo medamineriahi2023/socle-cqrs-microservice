@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  discovrey-server:
+    container_name: discovrey-server-socle
+    ports:
+      - '8761:8761'
+    image: interne.oga.fr/socle/discovery-server
+    depends_on:
+      - config-server
+    networks:
+      - net-socle
+    environment:
+      - ZIPKIN_URL=${ZIPKIN_URL}
+      - EUREKA_URL=${EUREKA_URL}
+      - EUREKA_USERNAME=${EUREKA_USERNAME}
+      - EUREKA_PASSWORD=${EUREKA_PASSWORD}

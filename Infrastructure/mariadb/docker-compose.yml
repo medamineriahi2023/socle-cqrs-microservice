@@ -1,0 +1,17 @@
+version: '3.3'
+volumes:
+  mariadb-socle:
+services:
+  mariadb-socle:
+    image: killbill/mariadb:0.24
+    volumes:
+      - type: volume
+        source: mariadb-socle
+        target: /var/lib/mysql
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=killbill
+    networks:
+      - net-socle

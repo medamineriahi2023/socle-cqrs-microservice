@@ -1,0 +1,88 @@
+{
+  "endpoint": "/workflow/books",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ env "WORKFLOW_API" }}"],
+      "url_pattern": "/workflow/v1/books",
+      "method": "POST",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+},
+{
+    "endpoint": "/workflow/emails/sendMail",
+    "method": "POST",
+    "backend": [
+      {
+        "host": ["{{ env "WORKFLOW_API" }}"],
+        "url_pattern": "/workflow/v1/emails/sendMail",
+        "method": "POST",
+        "encoding": "json",
+        "disable_host_sanitize": false,
+        "sd": "static"
+      }
+    ]
+  },
+  {
+    "endpoint": "/workflow/emails/sendMailWithAttachment",
+    "method": "POST",
+    "backend": [
+      {
+        "host": ["{{ env "WORKFLOW_API" }}"],
+        "url_pattern": "/workflow/v1/emails/sendMailWithAttachment",
+        "method": "POST",
+        "encoding": "json",
+        "disable_host_sanitize": false,
+        "sd": "static"
+      }
+    ]
+},
+{
+      "endpoint": "/workflow/reviews/create",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/reviews/create",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/workflow/reviews/update",
+      "method": "PUT",
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/reviews/update",
+          "method": "PUT",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+},
+{
+  "endpoint": "/workflow/tasks/start",
+  "method": "POST",
+  "backend": [
+    {
+      "host": ["{{ env "WORKFLOW_API" }}"],
+      "url_pattern": "/workflow/v1/tasks/start",
+      "method": "POST",
+      "encoding": "json",
+      "disable_host_sanitize": false,
+      "sd": "static"
+    }
+  ]
+}
+
+
+
+

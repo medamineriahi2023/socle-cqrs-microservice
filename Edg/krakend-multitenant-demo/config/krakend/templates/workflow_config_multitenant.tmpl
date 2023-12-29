@@ -1,0 +1,133 @@
+
+    {
+      "endpoint": "/{tenant}/workflow/books",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/books",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/workflow/emails/sendMail",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/emails/sendMail",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/workflow/emails/sendMailWithAttachment",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/emails/sendMailWithAttachment",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/workflow/reviews/create",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/reviews/create",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/workflow/reviews/update",
+      "method": "PUT",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/reviews/update",
+          "method": "PUT",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    },
+    {
+      "endpoint": "/{tenant}/workflow/tasks/start",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "WORKFLOW_API" }}"],
+          "url_pattern": "/workflow/v1/tasks/start",
+          "method": "POST",
+          "encoding": "json",
+          "disable_host_sanitize": false,
+          "sd": "static"
+        }
+      ]
+    }

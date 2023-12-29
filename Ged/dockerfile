@@ -1,0 +1,5 @@
+# Utilisez une image de base appropriée pour Java (par exemple, une image OpenJDK)
+FROM openjdk:17
+ADD target/ged-0.0.1-SNAPSHOT.jar ged-0.0.1-SNAPSHOT.jar
+EXPOSE 9008
+ENTRYPOINT ["java", "-jar", "ged-0.0.1-SNAPSHOT.jar"]

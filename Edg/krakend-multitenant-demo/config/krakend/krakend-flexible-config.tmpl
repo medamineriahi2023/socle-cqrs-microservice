@@ -1,0 +1,21 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "port": 8080,
+  "host": ["http://192.168.176.1:8080"],
+  "extra_config": {},
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "{{ env "SERVICE_NAME" }}",
+  "read_timeout": "5s",
+  "idle_timeout": "5s",
+  "write_timeout": "5s",
+  "read_header_timeout": "5s",
+  "endpoints": [
+        {{ template "security_config_multitenant.tmpl" . }},
+        {{ template "ged_config_multitenant.tmpl" . }},
+        {{ template "subscription_config_multitenant.tmpl" . }},
+        {{ template "workflow_config_multitenant.tmpl" . }}
+  ]
+}

@@ -1,0 +1,16 @@
+version: '3.3'
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
+  db_mongodb_primary_socle: {}
+  db_mongodb_qualifier_socle: {}
+
+
+  db_postres_socle: {}
+
+networks:
+  net-socle:
+    driver: bridge

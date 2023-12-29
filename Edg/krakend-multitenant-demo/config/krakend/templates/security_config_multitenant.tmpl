@@ -1,0 +1,114 @@
+
+    {
+      "@comment": "Create User Endpoint",
+      "endpoint": "/{tenant}/security/create/user",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "get Users Endpoint",
+      "endpoint": "/{tenant}/security/all/users",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "GET",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Update User Endpoint",
+      "endpoint": "/{tenant}/security/update/user",
+      "method": "PUT",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users",
+          "method": "PUT"
+        }
+      ]
+    },
+    {
+      "@comment": "Delete User Endpoint",
+      "endpoint": "/{tenant}/security/delete/user/{iduser}",
+      "method": "DELETE",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/{iduser}",
+          "method": "DELETE",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    },
+    {
+      "@comment": "Change Password Endpoint",
+      "endpoint": "/{tenant}/security/user/changepassword",
+      "method": "POST",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "roles": ["user", "admin"],
+          "jwk_url": "http://localhost:8180/realms/master/protocol/openid-connect/certs",
+          "cache": true
+        }
+      },
+      "backend": [
+        {
+          "host": ["{{ env "SECURITY_API" }}"],
+          "url_pattern": "/security/v1/users/changepassword",
+          "method": "POST",
+          "encoding": "json",
+          "sd": "static",
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+

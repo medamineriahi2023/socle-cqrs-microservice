@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  microservice-cqrs:
+    container_name: cqrs-socle
+    ports:
+      - '5005:5005'
+    image: interne.oga.fr/socle/cqrs
+    depends_on:
+      - mongo_db
+      - db-socle
+      - cloud-gateway
+    networks:
+      - net-socle
+    environment:
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-socle:5432/Demo
+
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - CLOUD_CONFIG_URL=${CLOUD_CONFIG_URL}
+      - MONGO_URI_DB=${MONGO_URI_DB}
+      - KAFKA_HOST=${KAFKA_HOST}
+      - EUREKA_AUTH_URL=${EUREKA_AUTH_URL}
+      - EUREKA_URL=${EUREKA_URL}
+      - DATA_SOURCE_URL=${DATA_SOURCE_URL}
+      - ZIPKIN_URL=${ZIPKIN_URL}
+
